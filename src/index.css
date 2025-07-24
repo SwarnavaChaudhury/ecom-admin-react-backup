@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+
+@layer components {
+    .sub-menu {
+        @apply block flex items-center justify-start gap-1 hover:text-blue-500 duration-300 py-2 text-[16px]
+    }
+}
