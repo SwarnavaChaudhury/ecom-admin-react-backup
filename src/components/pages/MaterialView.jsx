@@ -15,6 +15,8 @@ import Breadcrumb from '../common/Breadcrumb';
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { TbEraserOff } from "react-icons/tb";
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic-light-dark.css';
 
 
 
@@ -27,6 +29,7 @@ export default function MaterialView() {
 
     let [currentPage, setCurrentPage] = useState('1');
     let [currLimit, setCurrLimit] = useState('5');
+    let [totalPages, setTotalPages] = useState('');
     let [searchStr, setSearchStr] = useState('');
 
     let [materialPagination, setMaterialPagination] = useState([])
@@ -43,9 +46,10 @@ export default function MaterialView() {
         })
             .then((response) => {
                 if (response.data._status == true) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setMaterials(response.data._data);
                     setMaterialPagination(response.data._pagination);
+                    setTotalPages(response.data._pagination.total_pages);
                 } else {
                     setMaterials([]);
                 }
@@ -214,7 +218,12 @@ export default function MaterialView() {
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr className=''>
                                         <th scope="col" className="px-6 py-3">
-                                            <input type="checkbox" name="" id="" onClick={checkedAll} checked={materials.length == checkedValue.length ? 'checked' : ''} />
+                                            {/* <input type="checkbox" name="" id="" onClick={checkedAll} checked={materials.length == checkedValue.length ? 'checked' : ''} /> */}
+                                            <input
+                                                type="checkbox"
+                                                onChange={checkedAll}
+                                                checked={materials.length === checkedValue.length}
+                                            />
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Material Name
@@ -238,7 +247,12 @@ export default function MaterialView() {
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                                                         <td className="px-6 py-4">
-                                                            <input type="checkbox" name="" id="" onClick={() => singleChecked(item._id)} checked={checkedValue.includes(item._id) ? 'checked' : ''} />
+                                                            {/* <input type="checkbox" name="" id="" onClick={() => singleChecked(item._id)} checked={checkedValue.includes(item._id) ? 'checked' : ''} /> */}
+                                                            <input
+                                                                type="checkbox"
+                                                                onChange={() => singleChecked(item._id)}
+                                                                checked={checkedValue.includes(item._id)}
+                                                            />
                                                         </td>
                                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {item.name}
@@ -258,7 +272,6 @@ export default function MaterialView() {
                                                                         Inactive
                                                                     </button>
                                                             }
-
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             <Link to={`/material/update/${item._id}`}>
@@ -281,7 +294,7 @@ export default function MaterialView() {
                             </table>
                         </div>
 
-                        <div className='w-full py-3 flex justify-center items-center gap-2'>
+                        {/* <div className='w-full py-3 flex justify-center items-center gap-2'>
                             {
                                 materials.length > 0
                                     ?
@@ -299,6 +312,14 @@ export default function MaterialView() {
                                     :
                                     ''
                             }
+                        </div> */}
+
+                        <div className='my-3'>
+                            <ResponsivePagination
+                                current={currentPage}
+                                total={totalPages}
+                                onPageChange={setCurrentPage}
+                            />
                         </div>
 
                         {/* ////////////////////////////////////////////////////////////// */}

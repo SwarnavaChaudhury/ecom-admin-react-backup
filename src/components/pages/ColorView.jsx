@@ -13,6 +13,11 @@ import { IoIosColorPalette } from "react-icons/io";
 import Breadcrumb from '../common/Breadcrumb';
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+
+
+
 
 
 
@@ -27,14 +32,18 @@ export default function ColorView() {
 
     let [currentPage, setCurrentPage] = useState('1');
     let [currLimit, setCurrLimit] = useState('5');
+    let [totalPages, setTotalPages] = useState('');
 
     let [colorPagination, setColorPagination] = useState([]);
 
     let [checkedValue, setCheckedValue] = useState([]);
     let [apiStatus, setApiStatus] = useState(false);
 
+
+
     useEffect(() => {
-        axios.post(`http://localhost:8000/api/admin/color/view`, {
+        // axios.post(`http://localhost:8000/api/admin/color/view`, {
+        axios.post(import.meta.env.VITE_API_BASE_URL + import.meta.env.VITE_COLOR_VIEW, {
             page: currentPage,
             limit: currLimit,
             limit: 5,
@@ -44,6 +53,7 @@ export default function ColorView() {
                     // console.log(response.data);
                     setColors(response.data._data);
                     setColorPagination(response.data._pagination);
+                    setTotalPages(response.data._pagination.total_pages);
                 } else {
                     setColors([]);
                 }
@@ -182,7 +192,6 @@ export default function ColorView() {
                         <div className='flex items-center justify-start gap-3'>
                             <button className='bg-blue-600 text-white p-3 rounded-lg cursor-pointer' onClick={() => setSearchfilter(!searchfilter)}>
                                 {searchfilter ? <MdFilterListAlt /> : <MdFilterAltOff />}
-
                             </button>
                             <button className='bg-green-700 text-white py-2 px-5 rounded-lg cursor-pointer font-bold' onClick={changeStatus}>
                                 Change Status
@@ -202,7 +211,12 @@ export default function ColorView() {
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr className=''>
                                         <th scope="col" className="px-6 py-3">
-                                            <input type="checkbox" name="" id="" onClick={checkedAll} checked={colors.length == checkedValue.length ? 'checked' : ''} />
+                                            {/* <input type="checkbox" onClick={checkedAll} checked={colors.length == checkedValue.length ? 'checked' : ''} /> */}
+                                            <input
+                                                type="checkbox"
+                                                onChange={checkedAll}
+                                                checked={colors.length === checkedValue.length}
+                                            />
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Color Name
@@ -229,7 +243,12 @@ export default function ColorView() {
                                                 return (
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                                                         <td className="px-6 py-4">
-                                                            <input type="checkbox" name="" id="" onClick={() => singleChecked(item._id)} checked={checkedValue.includes(item._id) ? 'checked' : ''} />
+                                                            {/* <input type="checkbox" name="" id="" onClick={() => singleChecked(item._id)} checked={checkedValue.includes(item._id) ? 'checked' : ''} /> */}
+                                                            <input
+                                                                type="checkbox"
+                                                                onChange={() => singleChecked(item._id)}
+                                                                checked={checkedValue.includes(item._id)}
+                                                            />
                                                         </td>
                                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             {
@@ -284,7 +303,7 @@ export default function ColorView() {
                         </div>
 
 
-                        <div className='w-full py-3 flex justify-center items-center gap-2'>
+                        {/* <div className='w-full py-3 flex justify-center items-center gap-2'>
                             {
                                 colors.length > 0
                                     ?
@@ -302,8 +321,16 @@ export default function ColorView() {
                                     :
                                     ''
                             }
-                        </div>
+                        </div> */}
 
+
+                        <div className='my-3'>
+                            <ResponsivePagination
+                                current={currentPage}
+                                total={totalPages}
+                                onPageChange={setCurrentPage}
+                            />
+                        </div>
 
 
                         {/* ////////////////////////////////////////////////////////////// */}

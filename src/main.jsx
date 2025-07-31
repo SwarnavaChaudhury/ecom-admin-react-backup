@@ -72,9 +72,11 @@ createRoot(document.getElementById('root')).render(
         <Route path='/category'>
           <Route path='add' element={<ParentCateAdd />} />
           <Route path='view' element={<ParentCateView />} />
+          <Route path='update/:id?' element={<ParentCateAdd />} />
           <Route path='sub-category'>
             <Route path='add' element={<SubCateAdd />} />
             <Route path='view' element={<SubCateView />} />
+            <Route path='update/:id?' element={<SubCateAdd />} />
           </Route>
           <Route path='sub-sub-category'>
             <Route path='add' element={<SubSubCateAdd />} />
@@ -99,6 +101,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/country'>
           <Route path='add' element={<CountryAdd />} />
           <Route path='view' element={<CountryView />} />
+          <Route path='update/:id?' element={<CountryAdd />} />
         </Route>
         <Route path='/testimonial'>
           <Route path='add' element={<TestimonialAdd />} />
