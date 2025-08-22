@@ -4,17 +4,6 @@ import JoditEditor from 'jodit-react';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
 
 import { Link } from 'react-router'
-import SideBar from '../common/SideBar'
-import Footer from '../common/Footer'
-import Header from '../common/Header'
-import { FaUser } from "react-icons/fa";
-import { MdHomeFilled } from "react-icons/md";
-import { MdFilterListAlt } from "react-icons/md";
-import { MdFilterAltOff } from "react-icons/md";
-import { FaPen } from "react-icons/fa";
-import { IoSearchSharp } from "react-icons/io5";
-import { IoIosColorPalette } from "react-icons/io";
-import { FaBarsStaggered } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaBagShopping } from "react-icons/fa6";
 import Breadcrumb from '../common/Breadcrumb';
@@ -125,7 +114,7 @@ export default function ProductAdd() {
                                     className={`p-8 text-center border-2 border-dashed rounded cursor-pointer hover:bg-blue-400 duration-500 ${prodActive ? 'bg-blue-50' : 'bg-gray-50'
                                         }`}
                                 >
-                                    <input {...getProdInput()} />
+                                    <input {...getProdInput()} name="front_image" />
                                     {prodActive
                                         ? 'Drop product image here…'
                                         : 'Drag & drop, or click to select'}
@@ -160,7 +149,7 @@ export default function ProductAdd() {
                                     className={`p-8 text-center border-2 border-dashed rounded cursor-pointer hover:bg-blue-400 duration-500 ${backActive ? 'bg-blue-50' : 'bg-gray-50'
                                         }`}
                                 >
-                                    <input {...getBackInput()} />
+                                    <input {...getBackInput()} name="back_image" />
                                     {backActive
                                         ? 'Drop back image here…'
                                         : 'Drag & drop, or click to select'}
@@ -195,7 +184,7 @@ export default function ProductAdd() {
                                     className={`p-8 text-center border-2 border-dashed rounded cursor-pointer hover:bg-blue-400 duration-500 ${galActive ? 'bg-blue-50' : 'bg-gray-50'
                                         }`}
                                 >
-                                    <input {...getGalInput()} multiple />
+                                    <input {...getGalInput()} multiple name='image_gallery' />
                                     {galActive
                                         ? 'Drop gallery images here…'
                                         : 'Drag & drop, or click to select (multiple)'}

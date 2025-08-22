@@ -1,16 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
-import SideBar from '../common/SideBar'
-import Footer from '../common/Footer'
-import Header from '../common/Header'
-import { FaUser } from "react-icons/fa";
-import { MdHomeFilled } from "react-icons/md";
 import { MdFilterListAlt } from "react-icons/md";
 import { MdFilterAltOff } from "react-icons/md";
-import { FaPen } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
-import { IoIosColorPalette } from "react-icons/io";
-import { FaBarsStaggered } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
