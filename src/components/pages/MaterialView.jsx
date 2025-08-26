@@ -39,7 +39,8 @@ export default function MaterialView() {
 
     useEffect(() => {
 
-        axios.post(`http://localhost:8000/api/admin/material/view`, {
+        // axios.post(`http://localhost:8000/api/admin/material/view`, {
+        axios.post(import.meta.env.VITE_API_BASE_URL + import.meta.env.VITE_MATERIAL_VIEW, {
             page: currentPage,
             limit: currLimit,
             name: searchStr,

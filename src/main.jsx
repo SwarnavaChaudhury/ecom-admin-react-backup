@@ -87,6 +87,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/product'>
           <Route path='add' element={<ProductAdd />} />
           <Route path='view' element={<ProductView />} />
+          <Route path='update/:id?' element={<ProductAdd />} />
         </Route>
         <Route path='/why-choose-use'>
           <Route path='add' element={<WhyChooseUsAdd />} />
